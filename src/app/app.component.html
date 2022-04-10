@@ -6,13 +6,24 @@
   <input type="password" name="password"
     ngModel 
     passwordStrength
+    minlength="5"
     #password="ngModel"
     placeholder="Password">
   <button (click)="onLogin(loginForm)"> Login </button>
   <div>
     {{ loginForm.value | json }}, {{ loginForm.valid }}
   </div>
-  <div *ngIf="password.errors?.passwordStrength">
-    Your password must have lowercase, UpperCase and numeric character.
-  </div>
+
+  //onlyOneError pipe will make sure that only 1 error msg is presented in the order of priority
+  <ng-container *ngIf="password.errors | onlyOneError:['minlength','passwordStrength'] as error">
+
+    <div *ngIf="errors?.passwordStrength">
+      Your password must have lowercase, UpperCase and numeric character.
+    </div>
+
+    <div *ngIf="errors?.minlength">
+    Your password must have at least 5 characters.
+    </div>
+
+  </ng-container>
 </form>
