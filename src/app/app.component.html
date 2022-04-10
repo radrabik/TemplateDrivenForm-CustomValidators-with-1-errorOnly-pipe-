@@ -14,14 +14,14 @@
     {{ loginForm.value | json }}, {{ loginForm.valid }}
   </div>
 
-  //onlyOneError pipe will make sure that only 1 error msg is presented in the order of priority
+  <!-- onlyOneError pipe will make sure that only 1 error msg is presented in the order of priority -->
   <ng-container *ngIf="password.errors | onlyOneError:['minlength','passwordStrength'] as error">
 
-    <div *ngIf="errors?.passwordStrength">
+    <div *ngIf="error?.passwordStrength">
       Your password must have lowercase, UpperCase and numeric character.
     </div>
 
-    <div *ngIf="errors?.minlength">
+    <div *ngIf="error?.minlength">
     Your password must have at least 5 characters.
     </div>
 
